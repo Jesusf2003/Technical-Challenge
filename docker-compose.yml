@@ -1,0 +1,9 @@
+services:
+  microservice:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - /data/springboot
+    ports:
+      - 8090:8090

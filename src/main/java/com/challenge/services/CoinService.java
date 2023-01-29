@@ -36,7 +36,7 @@ public class CoinService {
 		return this.repo.save(data);
 	}
 
-	public String conversion(String from, String to, double amount) throws IOException {
+	public double conversion(String from, String to, double amount) throws IOException {
 		URL url = new URL("https://api.exchangerate.host/convert?from=" + from + "&to="+to+"&amount="+amount);
 		HttpURLConnection request = (HttpURLConnection) url.openConnection();
 		request.connect();
@@ -45,7 +45,7 @@ public class CoinService {
 		JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
 		JsonObject jsonobj = root.getAsJsonObject();
 
-		String req_result = jsonobj.get("result").getAsString();
+		double req_result = jsonobj.get("result").getAsDouble();
 		return req_result;
 	}
 }

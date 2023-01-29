@@ -42,7 +42,7 @@ public class ChallengeController {
 		@PathParam("to") String to,
 		@PathParam("amount") double amount
 	) throws IOException {
-		Map<String, Object> response = new HashMap<String, Object>();
+		Map<String, Double> response = new HashMap<String, Double>();
 		response.put("result", service.conversion(from, to, amount));
 		return ResponseEntity.ok(response);
 	}
