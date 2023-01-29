@@ -1,5 +1,8 @@
 server.port: 8090
-
+jfc:
+  cookie: canales
+  secret: secretkey
+  expiration: 10000
 spring:
   application:
     name: currency-converter

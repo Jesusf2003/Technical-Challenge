@@ -1,19 +1,40 @@
 package com.challenge.services;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.*;
+import java.net.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import org.springframework.security.core.userdetails.User;
+
+import com.challenge.domain.*;
+import com.google.gson.*;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 public class CoinService {
+
+	private final UsersRepository repo;
+
+	public CoinService(UsersRepository repo) {
+		this.repo = repo;
+	}
+
+	public Flux<Users> getAll() {
+		return this.repo.findAll();
+	}
+
+	public Mono<Users> register(Users data) {
+		return this.repo.save(data);
+	}
 
 	public String conversion(String from, String to, double amount) throws IOException {
 		URL url = new URL("https://api.exchangerate.host/convert?from=" + from + "&to="+to+"&amount="+amount);
