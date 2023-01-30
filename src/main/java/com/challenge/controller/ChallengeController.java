@@ -32,9 +32,19 @@ public class ChallengeController {
 		return this.service.getAll();
 	}
 
+	@GetMapping("/users/id/{id}")
+	public Mono<Users> getUserById(@PathVariable("id") Long id) {
+		return this.service.getById(id);
+	}
+
 	@PostMapping("/users")
 	public Mono<Users> saveUser(@RequestBody Users data) {
 		return this.service.register(data);
+	}
+
+	@PutMapping("/users")
+	public Mono<Users> updateUser(@RequestBody Users data) {
+		return this.service.update(data);
 	}
 
 	@GetMapping("/convert")

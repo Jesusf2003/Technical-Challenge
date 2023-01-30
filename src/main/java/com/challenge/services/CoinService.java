@@ -29,8 +29,16 @@ public class CoinService {
 	public Flux<Users> getAll() {
 		return this.repo.findAll();
 	}
+	
+	public Mono<Users> getById(Long id) {
+		return this.repo.findById(id);
+	}
 
 	public Mono<Users> register(Users data) {
+		return this.repo.save(data);
+	}
+
+	public Mono<Users> update(Users data) {
 		return this.repo.save(data);
 	}
 
