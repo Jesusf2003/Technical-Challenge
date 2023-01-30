@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h1>Convertidor de monedas</h1>
+    </div>
+    <div class="card-body">
+      <div class="container">
+        <div class="row">
+          <form class="form-vertical" >
+            <div class="form-group-center">
+              <input type="number" class="form-control" min="1" placeholder="Ingrese un monto" [(ngModel)]="amount"[ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="input-group">
+              <span class="input-group-text">Origen</span>
+              <input type="text" class="form-control" [(ngModel)]="from"[ngModelOptions]="{standalone: true}">
+              <span class="input-group-text">Cambiar a:</span>
+              <input type="text" class="form-control" [(ngModel)]="to"[ngModelOptions]="{standalone: true}">
+            </div>
+          </form>
+          <div>
+            <button type="button" class="btn btn-outline-primary" (click)="currencyCurrent();">Iniciar</button>
+          </div>
+          <div>
+            <p>El resultado es: {{response.resultado}}</p>
+            <p>El tipo de cambio es: {{response.tipo}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
