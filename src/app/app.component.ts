@@ -12,6 +12,8 @@ export class AppComponent {
   from!: string;
   to!: string;
   amount!: number;
+  selectedOrigin!: string;
+  selectedFate!: string;
 
   public response: ApiResponse = new ApiResponse();
 
@@ -19,8 +21,30 @@ export class AppComponent {
     private restService: ApirestService
   ) {}
 
+  origin = [
+    { name: "USD" },
+    { name: "PEN" },
+    { name: "EUR" }
+  ]
+
+  fate = [
+    { name: "USD" },
+    { name: "PEN" },
+    { name: "EUR" }
+  ]
+
+  updateOrigin(e: any) {
+    this.selectedOrigin = e.target.value
+    console.log(this.selectedOrigin);
+  }
+
+  updateFate(e: any) {
+    this.selectedFate = e.target.value;
+    console.log(this.selectedFate);
+  }
+
   currencyCurrent() {
-    this.restService.conversion(this.from, this.to, this.amount).subscribe(
+    this.restService.conversion(this.selectedOrigin, this.selectedFate, this.amount).subscribe(
       rest => {
         this.response = rest;
         console.log(this.response);

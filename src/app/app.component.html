@@ -7,14 +7,23 @@
       <div class="container">
         <div class="row">
           <form class="form-vertical" >
-            <div class="form-group-center">
-              <input type="number" class="form-control" min="1" placeholder="Ingrese un monto" [(ngModel)]="amount"[ngModelOptions]="{standalone: true}">
-            </div>
             <div class="input-group">
-              <span class="input-group-text">Origen</span>
-              <input type="text" class="form-control" [(ngModel)]="from"[ngModelOptions]="{standalone: true}">
-              <span class="input-group-text">Cambiar a:</span>
-              <input type="text" class="form-control" [(ngModel)]="to"[ngModelOptions]="{standalone: true}">
+              <input
+                type="number"
+                class="form-control"
+                id="floatingSelect"
+                min="1"
+                placeholder="Ingrese un monto"
+                [(ngModel)]="amount"
+                [ngModelOptions]="{standalone: true}">
+              <select class="form-select" #origen (change)="updateOrigin($event)">
+                <option value="default">---</option>
+                <option *ngFor="let item of origin" [value]="item.name" value="{{selectedOrigin}}">{{item.name}}</option>
+              </select>
+              <select class="form-select" #destino (change)="updateFate($event)">
+                <option value="default">---</option>
+                <option *ngFor="let item of fate" [value]="item.name" value="{{selectedFate}}">{{item.name}}</option>
+              </select>
             </div>
           </form>
           <div>
