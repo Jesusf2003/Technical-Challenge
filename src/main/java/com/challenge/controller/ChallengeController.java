@@ -16,6 +16,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/challenge")
 public class ChallengeController {
 
@@ -42,8 +43,18 @@ public class ChallengeController {
 		@PathParam("to") String to,
 		@PathParam("amount") double amount
 	) throws IOException {
-		Map<String, Double> response = new HashMap<String, Double>();
-		response.put("result", service.conversion(from, to, amount));
+		double type = service.conversion(from, to, amount) / amount;
+		Map<String, Object> response = new HashMap<String, Object>();
+		response.put("origen", from);
+		response.put("destino", to);
+		response.put("monto", amount);
+		response.put("resultado", service.conversion(from, to, amount));
+		response.put("tipo", String.format("%.6f", type));
 		return ResponseEntity.ok(response);
+	}
+
+	@GetMapping("/rates")
+	public String rates() throws IOException, Exception {
+		return this.service.rate();
 	}
 }
